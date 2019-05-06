@@ -7,11 +7,30 @@ write_files:
   - owner: www-data:www-data
   - path: /etc/nginx/sites-available/default
     content: |
+      upstream tomcat {  
+        # Use IP Hash for session persistence  
+        ip_hash;
+        # List of Tomcat application servers  
+        server 192.168.5.1:8080;  
+        server 192.168.5.2:8080;  
+      }
       server {
         listen 443 ssl;
         ssl_certificate /etc/nginx/ssl/sgfxcert.cert;
         ssl_certificate_key /etc/nginx/ssl/sgfxcert.prv;
-      }
+      
+        # Load balance requests for /tomcat-app/ across Tomcat application servers  
+        location /tomcat-app/ {  
+          proxy_pass http://tomcat;  
+          proxy_cache backcache;  
+        }
+
+        # Return a temporary redirect to the /tomcat-app/ directory  
+        # when user requests '/'  
+        location = / { 
+            return 302 /tomcat-app/;  
+        }
+      }     
 runcmd:
   - secretName=$(find /var/lib/waagent/ -name "*.prv" | cut -c -57)
   - mkdir /etc/nginx/ssl
