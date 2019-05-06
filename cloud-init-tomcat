@@ -1,0 +1,41 @@
+#cloud-config
+package_upgrade: true
+packages:
+  - default-jdk
+write_files:
+  - owner: tomcat:tomcat
+  - path: /opt/tomcat/conf/tomcat-users.xml
+    content: |
+      <?xml version='1.0' encoding='utf-8'?>
+      <tomcat-users>
+        <role rolename="manager-gui"/>
+        <role rolename="manager-script"/>
+        <role rolename="manager-jmx"/>
+        <role rolename="manager-jmx"/>
+        <role rolename="admin-gui"/>
+        <role rolename="admin-script"/>
+        <user username="edureka" password="edureka" roles="manager-gui,manager-script,manager-jmx,manager-status,admin-gui,admin-script"/>
+      </tomcat-users>
+runcmd:
+  - mkdir /opt/tomcat
+  - groupadd -g 200 tomcat
+  - useradd -u 201 -g 200 tomcat -s /bin/false -d /opt/tomcat
+  - cd /tmp
+  - wget http://www-us.apache.org/dist/tomcat/tomcat-9/v9.0.19/bin/apache-tomcat-9.0.19.tar.gz
+  - tar xzvf apache-tomcat-9*tar.gz -C /opt/tomcat --strip-components=1
+  - cd /opt/tomcat
+  - chgrp -R tomcat /opt/tomcat
+  - chmod -R g+r conf
+  - chmod g+x conf
+  - cd /opt
+  - chown -R tomcat tomcat/
+  - echo "export CATALINA_HOME="/opt/tomcat"" >> ~/.bashrc
+  - echo "export JAVA_HOME="/usr/lib/jvm/java-1.11.0-openjdk-amd64"" >> ~/.bashrc
+  - echo "export JRE_HOME="/usr/lib/jvm/java-1.11.0-openjdk-amd64"" >> ~/.bashrc
+  - source ~/.bashrc
+  - cd /opt/tomcat
+  - chmod +x ./bin/startup.sh
+  - ./bin/startup.sh
+  - cd /opt/tomcat/webapps
+  - wget http://updates.jenkins-ci.org/download/war/2.176/jenkins.war
+  
