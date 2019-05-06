@@ -23,8 +23,6 @@ chmod g+x conf
 
 cd /opt
 chown -R tomcat tomcat/
-update-java-alternatives -a
-
 echo "export CATALINA_HOME="/opt/tomcat"" >> ~/.bashrc
 echo "export JAVA_HOME="/usr/lib/jvm/java-1.11.0-openjdk-amd64"" >> ~/.bashrc
 echo "export JRE_HOME="/usr/lib/jvm/java-1.11.0-openjdk-amd64"" >> ~/.bashrc
