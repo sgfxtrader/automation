@@ -1,4 +1,4 @@
-#cloud-config
+2#cloud-config
 package_upgrade: true
 packages:
   - nginx
@@ -11,8 +11,8 @@ write_files:
         # Use IP Hash for session persistence  
         ip_hash;
         # List of Tomcat application servers  
-        server 192.168.5.1:8080;  
-        server 192.168.5.2:8080;  
+        server 192.168.2.1:8080;  
+        server 192.168.2.2:8080;  
       }
       server {
         listen 443 ssl;
