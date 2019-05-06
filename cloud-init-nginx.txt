@@ -8,8 +8,8 @@ write_files:
     content: |
       server {
         listen 443 ssl;
-        ssl_certificate /etc/nginx/ssl/mycert.cert;
-        ssl_certificate_key /etc/nginx/ssl/mycert.prv;
+        ssl_certificate /etc/nginx/ssl/sgfxcert.cert;
+        ssl_certificate_key /etc/nginx/ssl/sgfxcert.prv;
       }
 runcmd:
   - secretName=$(find /var/lib/waagent/ -name "*.prv" | cut -c -57)
