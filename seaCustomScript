@@ -1,11 +1,5 @@
 #!/bin/bash
 
-# update package source
-apt-get -y update
-
-# install NGINX
-apt-get -y install nginx
-
 # install JDK
 apt-get -y update
 apt-get -y install default-jdk
