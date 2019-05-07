@@ -1,9 +1,9 @@
 2#cloud-config
 package_upgrade: true
 packages:
-  - nginx
   - default-jdk
-write_files:
+  - nginx
+  write_files:
   - owner: www-data:www-data
   - path: /etc/nginx/sites-available/default
     content: |
