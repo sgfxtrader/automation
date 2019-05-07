@@ -3,26 +3,18 @@ package_upgrade: true
 packages:
   - default-jdk
 write_files:
-  - owner: tomcat:tomcat
-  - path: /opt/tomcat/conf/tomcat-users.xml
-    content: |
-      <?xml version='1.0' encoding='utf-8'?>
-      <tomcat-users>
-        <role rolename="manager-gui"/>
-        <role rolename="manager-script"/>
-        <role rolename="manager-jmx"/>
-        <role rolename="manager-jmx"/>
-        <role rolename="admin-gui"/>
-        <role rolename="admin-script"/>
-        <user username="edureka" password="edureka" roles="manager-gui,manager-script,manager-jmx,manager-status,admin-gui,admin-script"/>
-      </tomcat-users>
-runcmd:
+  runcmd:
   - mkdir /opt/tomcat
   - groupadd -g 200 tomcat
   - useradd -u 201 -g 200 tomcat -s /bin/false -d /opt/tomcat
   - cd /tmp
+  - wget https://raw.githubusercontent.com/sgfxtrader/automation/azureCustomScript/tomcat-users.xml
+  - wget http://updates.jenkins-ci.org/download/war/2.176/jenkins.war
   - wget http://www-us.apache.org/dist/tomcat/tomcat-9/v9.0.19/bin/apache-tomcat-9.0.19.tar.gz
   - tar xzvf apache-tomcat-9*tar.gz -C /opt/tomcat --strip-components=1
+  - rm /opt/tomcat/conf/tomcat-users.xml
+  - mv /tmp/tomcat-users.xml /opt/tomcat/conf
+  - mv /tmp/jenkins.war /opt/tomcat/webapps
   - cd /opt/tomcat
   - chgrp -R tomcat /opt/tomcat
   - chmod -R g+r conf
@@ -36,6 +28,4 @@ runcmd:
   - cd /opt/tomcat
   - chmod +x ./bin/startup.sh
   - ./bin/startup.sh
-  - cd /opt/tomcat/webapps
-  - wget http://updates.jenkins-ci.org/download/war/2.176/jenkins.war
   
