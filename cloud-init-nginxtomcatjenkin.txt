@@ -4,7 +4,38 @@ packages:
   - default-jdk
   - nginx
 write_files:
-  runcmd:
+  - owner: www-data:www-data
+  - path: /etc/nginx/sites-available/default
+    content: |
+      upstream tomcat {  
+        # Use IP Hash for session persistence  
+        ip_hash;
+        # List of Tomcat application servers  
+        server 192.168.2.10:8080;  
+        server 192.168.2.11:8080;  
+      }
+      server {
+        listen 443 ssl;
+        ssl_certificate /etc/nginx/ssl/sgfxcert.cert;
+        ssl_certificate_key /etc/nginx/ssl/sgfxcert.prv;
+      
+        # Load balance requests for /tomcat-app/ across Tomcat application servers  
+        location /tomcat-app/ {  
+          proxy_pass http://tomcat;  
+          proxy_cache backcache;  
+        }
+
+        # Return a temporary redirect to the /tomcat-app/ directory  
+        # when user requests '/'  
+        location = / { 
+            return 302 /tomcat-app/;  
+        }
+      }     
+runcmd:
+  - secretName=$(find /var/lib/waagent/ -name "*.prv" | cut -c -57)
+  - mkdir /etc/nginx/ssl
+  - cp $secretName.crt /etc/nginx/ssl/sgfxcert.cert
+  - cp $secretName.prv /etc/nginx/ssl/sgfxcert.prv
   - mkdir /opt/tomcat
   - groupadd -g 200 tomcat
   - useradd -u 201 -g 200 tomcat -s /bin/false -d /opt/tomcat
@@ -31,3 +62,4 @@ write_files:
   - cd /opt/tomcat
   - chmod +x ./bin/startup.sh
   - ./bin/startup.sh
+  - service nginx restart
