@@ -2,6 +2,7 @@
 package_upgrade: true
 packages:
   - default-jdk
+  - nginx
 write_files:
   runcmd:
   - mkdir /opt/tomcat
