@@ -1,0 +1,30 @@
+#cloud-config
+package_upgrade: true
+packages:
+  - nginx
+write_files:
+  - owner: www-data:www-data
+    path: /etc/nginx/sites-available/default
+    content: |
+      server {
+              listen 80 default_server;
+              listen [::]:80 default_server;
+              root /var/www/html;
+              index index.html;
+              server_name example.com;
+              location / {
+                              try_files $uri $uri/ =404;
+                      }
+              }
+runcmd:
+  - service nginx restart
+  - cd /var/www/html
+  - wget https://raw.githubusercontent.com/sgfxtrader/automation/az/Login1.rar
+  - apt-get update
+  - apt-get -y install unrar
+  - unrar x -r Login1.rar
+  - mv Login1/* .
+  - rm Login1
+  - rm Login1.rar
+  - rm index.nginx-debian.html
+  
