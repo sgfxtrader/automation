@@ -1,9 +1,16 @@
 ## Welcome to Automation Azure (Az) Scripts page
 
-Currently, this page only contain scripts to build and deploy linux virtual machine NGINX and a HTML5 html.
+Currently, this page only contain scripts to build and deploy linux virtual machine NGINX and a HTML5 webpage.
 
 ```markdown
-The scripts are used mainly for getting started on Azure CLI
+The scripts are used mainly for Azure CLI deployment.
+
+Part 1 - Automation Script for getting started on Azure CLI
 
 - buildWebScript
-- init-nginx
+
+cloud-init script to be passed into the VM
+- cloud-nginx.txt
+
+package for HTML5 webpage
+- login.rar
