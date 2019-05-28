@@ -1,2 +1,20 @@
-# automation custom scripts
-Creating workload on Azure - Getting start scripts to run in linux virtual machines
+## Welcome to Automation Custom Scripts page
+
+Currently, this page only contain scripts to install Tomcat and NGINX on Linux Ubuntu.
+
+### Markdown
+
+Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+
+```markdown
+Syntax highlighted code block
+
+# Header 1
+## Header 2
+### Header 3
+
+- Bulleted
+- List
+
+1. Numbered
+2. List
