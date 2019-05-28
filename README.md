@@ -3,4 +3,4 @@
 ```markdown
 Do check out the following branches for more details.
 - az
-- azurecustomscripts
+- azureCustomScript
