@@ -3,14 +3,7 @@
 Currently, this page only contain scripts to install Tomcat and NGINX on Linux Ubuntu.
 
 ```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
+The scripts are used mainly for getting started on Azure CLI
 
 - nginxCustomScript
 - tomcatCustomScript
-
-1. Numbered
-2. List
