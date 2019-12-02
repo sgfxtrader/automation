@@ -1,0 +1,137 @@
+#!/bin/bash
+clear
+printf "BuildWebScript is written by Francis Nai on 2 Dec 2019\n"
+printf "Email me at francis nai@sap if you have any feedback\n"
+printf "######################################################################################################################\n"
+printf "This script $0 is run by $USER on $OSTYPE with $SHELL at $PWD\n"
+printf "Start creating infrastructure assets on Azure at $HOSTNAME on `date '+%d/%m/%Y_%H:%M:%S'`\n"
+printf "######################################################################################################################\n\n"
+
+# Initialize critical values
+a=$(echo -e $2 | sed -r 's/\<./\U&/g')
+b="sg${1,,}"
+c=$(( RANDOM % (200 - 10 + 1 ) + 10 ))
+
+# Array for Subnet (sub) 
+# Column 1 is Subnet Name
+# Column 2 is Subnet IP
+# Column 3 is Subnet NSG
+# Column 4 is NSG Rule Name
+# Column 5 is NSG Port
+# Column 6 is NSG Priority
+# Column 7-9 will be 2nd set of NSG rule
+
+declare -A sub
+
+# Array for Virtual Machine (vlm) 
+# Column 1 is Virtual Machine name
+# Column 2 is Virtual Machine Image
+# Column 3 is Virtual Machine Size
+# Column 4 is Virtual Machine Username
+# Column 5 is Virtual Machine Password
+# Column 6 is Virtual Machine IP
+# Column 7 is Virtual Machine FQDN
+# Column 8 is Virtual Machine Public IP SKU
+
+declare -A vlm
+
+# Array for Azure Firewall (afw) 
+# Column 1 is Firewall Name
+# Column 2 is Firewall Public IP Name
+# Column 3 is Firewall Public IP Address
+# Column 4 is Firewall Private IP
+
+declare -A afw
+
+# Array for Application Gateway (apg) 
+# Column 1 is Application Gateway Name
+# Column 2 is Application Gateway Public IP
+
+declare -A apg
+
+# Initialize values for Application gateway array
+apg[1,1]="ag$b"
+apg[1,2]="pip$b"
+
+
+if [ -z "$b" ] || [ -z "$2" ]; then
+    printf "Correct Usage:\n"
+    printf "$0 <azure resource group> <azure region>\n"
+    printf "Example: $0 myResourceGroup 'South East Asia'\n\n"
+else
+    val=$(az group exists -g $b -n $b)
+    if [ $val == "false" ]; then
+        # Section 0: Create a resource group
+        
+        
+
+        # Section 1: Create Vnet with Azure Firewall subnet
+        
+        
+        
+        
+        # Section 2: Create DDOS Protection for Vnet
+        
+        
+
+        # Section 3: Create Static Public IP with azure assigned DNS name
+        
+        
+        
+
+        # Obtain the Public IP for Azure Firewall 
+        
+        
+        
+        
+        # Initialize values for Firewall array
+        
+        
+        
+        
+        # Section 4: Create Azure Firewall, assign Public IP and Private IP 
+        
+        
+        
+
+               
+    fi
+
+    # Section 5: Create NSG
+    
+    
+    
+
+    # Section 6: Create Subnet
+    
+    
+    
+   
+    # Section 7: Create NSG rule
+    # Turn on Port 22 at NSG
+    
+    
+    
+    
+    
+    # Turn on Port 80 at NSG
+    
+    
+    
+    
+
+
+    # Section 8: Create VM Linux
+    
+    
+    
+    
+    
+    
+    printf "\n"
+    
+    
+    
+    printf "\n\n If you like this script, please do not forget to like my post and endorse my skills in Linkedin. Thank you!\n"
+    printf " https://www.linkedin.com/in/francis-nai-7454383/  \n\n"
+fi
