@@ -9,7 +9,7 @@ Part 1 - Automation Script for getting started on Azure CLI
 - buildWebScript
 
 cloud-init script to be passed into the VM
-- cloud-nginx.txt
+- cloud-init-nginx-http-template.txt
 
 package for HTML5 webpage
 - Login.rar
