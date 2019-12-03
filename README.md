@@ -11,9 +11,6 @@ Part 1 - Automation Script for getting started on Azure CLI
 cloud-init script to be passed into the VM
 - cloud-init-nginx-http-template.txt
 
-package for HTML5 webpage
-- Login.rar
-
 Part 2 - Automation Script for deploying Web, App and DB
 - buildWebAppScript
 
