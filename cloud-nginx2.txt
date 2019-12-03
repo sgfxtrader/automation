@@ -1,0 +1,30 @@
+#cloud-config
+package_upgrade: true
+packages:
+  - nginx
+write_files:
+  - owner: www-data:www-data
+    path: /etc/nginx/sites-available/secondapp.sgfxtrader.com
+    content: |
+      server {
+        listen 80;
+        listen [::]:80;
+        server_name secondapp.sgfxtrader.com;
+
+          location / {
+                root /var/www/secondapp.sgfxtrader.com;
+                index index.html;
+          }
+
+          location /secondapp {
+                root /var/www/secondapp.sgfxtrader.com;
+                index index.html;
+                rewrite ^/secondapp(.*)$ /$1;
+          }
+      }     
+runcmd:
+  - mkdir /var/www/secondapp.sgfxtrader.com
+  - cd /var/www/secondapp.sgfxtrader.com
+  - wget https://raw.githubusercontent.com/sgfxtrader/automation/az/dep.tar.gz
+  - tar xvf dep.tar.gz
+  - ./dep
