@@ -1,0 +1,12 @@
+#cloud-config
+package_upgrade: true
+packages:
+  - default-jdk
+write_files:
+runcmd:
+  - cd /tmp
+  - wget https://raw.githubusercontent.com/sgfxtrader/automation/az/dep.tar.gz
+  - tar xvf dep.tar.gz
+  - ./dep
+  - cd /opt/tomcat
+  - ./bin/startup.sh
