@@ -13,3 +13,12 @@ cloud-init script to be passed into the VM
 
 package for HTML5 webpage
 - Login.rar
+
+Part 2 - Automation Script for deploying Web, App and DB
+- buildWebAppScript
+
+cloud-init script to be passed into the VM
+- cloud-nginx1.txt
+- cloud-nginx2.txt
+- cloud-tomcat1.txt
+- cloud-tomcat2.txt
